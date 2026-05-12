@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="report-wrapper">
+
+    <h2>Выписка</h2>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+
+        <div class="summary-card income">
+            <h4>Доход</h4>
+            <p>{{ cash_income }}</p>
+        </div>
+
+        <div class="summary-card expense">
+            <h4>Расход</h4>
+            <p>{{ cash_expense }}</p>
+        </div>
+
+        <div class="summary-card balance">
+            <h4>Баланс</h4>
+            <p>{{ cash_status }}</p>
+        </div>
+
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-card">
+
+        <h3>Фильтр по периоду</h3>
+
+        <form method="post" action="/report">
+
+            <div class="filter-row">
+
+                <div>
+                    <label>От</label>
+                    <input type="date" name="date_bef">
+                </div>
+
+                <div>
+                    <label>До</label>
+                    <input type="date" name="date_aft">
+                </div>
+
+            </div>
+
+            <button type="submit">Показать</button>
+
+        </form>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Сумма</th>
+                    <th>Тип</th>
+                    <th>Описание</th>
+                    <th>Дата</th>
+                    <th>Пользователь</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for op in filter_operations %}
+                <tr class="{{ 'income' if op[2] == 'income' else 'expense' }}">
+
+                    <td>{{ op[0] }}</td>
+
+                    <td>
+                        {% if op[2] == 'income' %}
+                            <span class="income-text">+{{ op[1] }}</span>
+                        {% else %}
+                            <span class="expense-text">-{{ op[1] }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ op[2] }}</td>
+                    <td>{{ op[3] }}</td>
+                    <td>{{ op[4] }}</td>
+                    <td>{{ op[5] }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<style>
+.report-wrapper {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* SUMMARY */
+.summary {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    flex: 1;
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.summary-card h4 {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.summary-card p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.income p { color: #1e7e34; }
+.expense p { color: #c0392b; }
+.balance p { color: #1f1f1f; }
+
+/* FILTER */
+.filter-card {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.filter-card h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.filter-row div {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+/* BUTTON */
+button {
+    padding: 10px 14px;
+    border: none;
+    background: #1f1f1f;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #000;
+}
+
+/* TABLE */
+.table-card {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+thead {
+    background: #f5f6f8;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+tr:hover {
+    background: #fafafa;
+}
+
+/* COLORS */
+.income-text {
+    color: #1e7e34;
+    font-weight: 600;
+}
+
+.expense-text {
+    color: #c0392b;
+    font-weight: 600;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+    .summary {
+        flex-direction: column;
+    }
+
+    .filter-row {
+        flex-direction: column;
+    }
+}
+</style>
+
+{% endblock %}

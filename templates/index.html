@@ -1,0 +1,88 @@
+{% block content %}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <h2>Вход в систему</h2>
+
+        <form method="POST" action="/">
+            
+            <input type="text" name="user_login" placeholder="Логин">
+
+            <input type="password" name="user_password" placeholder="Пароль">
+
+            <button type="submit">Войти</button>
+
+            {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+            {% endif %}
+
+        </form>
+
+    </div>
+</div>
+
+<style>
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.auth-card {
+    background: #fff;
+    padding: 25px;
+    width: 320px;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+}
+
+.auth-card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: #999;
+}
+
+.auth-card button {
+    width: 100%;
+    padding: 10px;
+
+    background: #1f1f1f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.auth-card button:hover {
+    background: #000;
+}
+
+.error {
+    margin-top: 10px;
+    color: #c0392b;
+    font-size: 13px;
+    text-align: center;
+}
+</style>
+
+{% endblock %}

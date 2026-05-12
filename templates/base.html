@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет наличных средств</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f6f8;
+            color: #1f1f1f;
+            line-height: 1.5;
+        }
+
+        /* NAV */
+        nav {
+            background: #ffffff;
+            border-bottom: 1px solid #e6e6e6;
+            padding: 12px 20px;
+
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+    nav a:hover {
+            background: #f0f0f0;
+        }
+        /* 🔴 ВЫХОД */
+        .logout {
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+.logout:hover {
+    background: #ffecec;
+}
+        nav a.active {
+            background: #e9ecef;
+            font-weight: 600;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+            nav {
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 13px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('list_page') }}">Просмотр</a>
+        <a href="{{ url_for('add_page') }}">Ввод</a>
+        <a href="{{ url_for('report_page') }}">Отчет</a>
+    </div>
+
+    <div class="nav-right">
+        <a class="logout" href="{{ url_for('index_page') }}">Выход</a>
+    </div>
+</nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
