@@ -9,11 +9,11 @@
 
         <form method="POST" action="/update">
 
-            <input type="hidden" name="id_oper" value="{{ op[0] }}">
+            <input type="hidden" name="id_oper" value="{{ op.id }}">
 
             <div class="group">
                 <label>Сумма</label>
-                <input type="number" step="0.01" name="amount" value="{{ op[1] }}" required>
+                <input type="number" step="0.01" name="amount" value="{{ op.amount}}" required>
             </div>
 
             <div class="group">
@@ -22,13 +22,13 @@
                 <div class="radio-group">
                     <label>
                         <input type="radio" name="op_type" value="income"
-                        {% if op[2] == 'income' %} checked {% endif %}>
+                        {% if op.op_type == 'income' %} checked {% endif %}>
                         Доход
                     </label>
 
                     <label>
                         <input type="radio" name="op_type" value="expense"
-                        {% if op[2] == 'expense' %} checked {% endif %}>
+                        {% if op.op_type == 'expense' %} checked {% endif %}>
                         Расход
                     </label>
                 </div>
@@ -36,15 +36,13 @@
 
             <div class="group">
                 <label>Дата</label>
-                <input type="date" name="date" value="{{ op[4] }}">
+                <input type="date" name="date" value="{{ op.date }}">
             </div>
 
             <div class="group">
                 <label>Описание</label>
-                <input type="text" name="description" value="{{ op[3] }}" required>
+                <input type="text" name="description" value="{{ op.description }}" required>
             </div>
-
-
 
             <div class="btn-row">
                 <button type="submit" class="primary">Сохранить</button>

@@ -13,7 +13,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Сумма</th>
-                    <th>Тип</th>
                     <th>Описание</th>
                     <th>Дата</th>
                     <th>Пользователь</th>
@@ -25,31 +24,31 @@
             <tbody>
                 {% for op in operations %}
                 <tr class="{{ 'income' if op[2] == 'income' else 'expense' }}">
-                    <td>{{ op[0] }}</td>
+                    <td>{{ op.id }}</td>
 
                     <td>
-                        {% if op[2] == 'income' %}
-                            <span class="income-text">+{{ op[1] }}</span>
+                        {% if op.op_type == 'income' %}
+                            <span class="income-text">+{{ op.amount }}</span>
                         {% else %}
-                            <span class="expense-text">-{{ op[1] }}</span>
+                            <span class="expense-text">-{{ op.amount }}</span>
                         {% endif %}
                     </td>
 
-                    <td>{{ op[2] }}</td>
-                    <td>{{ op[3] }}</td>
-                    <td>{{ op[4] }}</td>
-                    <td>{{ op[5] }}</td>
+                    
+                    <td>{{ op.description }}</td>
+                    <td>{{ op.date }}</td>
+                    <td>{{ op.user }}</td>
 
                     <td>
                         <form method="POST" action="/delete" onsubmit="return confirm('Удалить запись?')">
-                            <input type="hidden" name="id" value="{{ op[0] }}">
+                            <input type="hidden" name="id" value="{{ op.id }}">
                             <button class="icon-btn">🗑</button>
                         </form>
                     </td>
 
                     <td>
                         <form method="POST" action="/edit" onsubmit="return confirm('Редактировать запись?')">
-                            <input type="hidden" name="id" value="{{ op[0] }}">
+                            <input type="hidden" name="id" value="{{ op.id }}">
                             <button class="icon-btn">✏️</button>
                         </form>
                     </td>

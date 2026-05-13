@@ -1,17 +1,26 @@
 {% block content %}
 
 <div class="auth-wrapper">
+
     <div class="auth-card">
 
         <h2>Вход в систему</h2>
 
         <form method="POST" action="/">
-            
-            <input type="text" name="user_login" placeholder="Логин">
 
-            <input type="password" name="user_password" placeholder="Пароль">
+            <input type="text"
+                   name="user_login"
+                   placeholder="Логин"
+                   required>
 
-            <button type="submit">Войти</button>
+            <input type="password"
+                   name="user_password"
+                   placeholder="Пароль"
+                   required>
+
+            <button type="submit">
+                Войти
+            </button>
 
             {% if error_message %}
                 <p class="error">{{ error_message }}</p>
@@ -20,69 +29,120 @@
         </form>
 
     </div>
+
 </div>
 
 <style>
+
+* {
+    box-sizing: border-box;
+}
+
 .auth-wrapper {
+    min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
+
+    padding: 20px;
+
+    background: #f5f6f8;
 }
 
 .auth-card {
-    background: #fff;
-    padding: 25px;
-    width: 320px;
+    width: 100%;
+    max-width: 400px;
+
+    background: white;
+
+    padding: 30px 25px;
+
+    border-radius: 14px;
+
     border: 1px solid #e6e6e6;
-    border-radius: 10px;
+
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
 
 .auth-card h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: 600;
     text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .auth-card input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
 
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 14px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+
+    font-size: 16px;
 }
 
 .auth-card input:focus {
     outline: none;
-    border-color: #999;
+    border-color: #888;
 }
 
 .auth-card button {
     width: 100%;
-    padding: 10px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
 
     background: #1f1f1f;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
 
     cursor: pointer;
+
     transition: 0.2s;
 }
 
 .auth-card button:hover {
-    background: #000;
+    background: black;
 }
 
 .error {
-    margin-top: 10px;
+    margin-top: 15px;
+
     color: #c0392b;
-    font-size: 13px;
+
     text-align: center;
+
+    font-size: 14px;
 }
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+    .auth-card {
+        padding: 25px 18px;
+    }
+
+    .auth-card h2 {
+        font-size: 22px;
+    }
+
+    .auth-card input,
+    .auth-card button {
+        font-size: 16px;
+    }
+}
+
 </style>
 
 {% endblock %}
